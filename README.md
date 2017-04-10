@@ -1,2 +1,2 @@
 # gupiao
-autolink  <http://wx-wzb.yhd123.com:9000/>
+ <http://wx-wzb.yhd123.com:9000/>
