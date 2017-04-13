@@ -6,6 +6,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,12 @@ public class IndexController {
     @Autowired
     Jqka jqka;
 
-    @RequestMapping("/fall")
+    @RequestMapping("fall")
     @ResponseBody
     Page<Stock> home() {
-        return stockRepository.findBySDateOrderByFallDescCodeAsc(DateFormatUtils.format(new Date(), "yyyyMMdd"), new PageRequest(0, 100));
+        Sort sort = new Sort(Sort.Direction.DESC, "fall").and(new Sort(Sort.Direction.ASC, "code"));
+        return stockRepository.findBySDate(DateFormatUtils.format(new Date(), "yyyyMMdd"), new PageRequest(0, 100, sort));
     }
-
 
     @RequestMapping("sync")
     @ResponseBody

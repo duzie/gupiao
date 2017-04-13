@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -47,6 +48,7 @@ public class Jqka {
                 fall(s);
             }
         }
+        stockRepository.deleteOld();
     }
 
     private void fall(Stock stock) {
@@ -88,7 +90,7 @@ public class Jqka {
     }
 
     public void getHistory(int page) {
-        Page<Stock> pageData = stockRepository.findBySDateOrderByFallDescCodeAsc(DateFormatUtils.format(new Date(), "yyyyMMdd"), new PageRequest(page++, 100));
+        Page<Stock> pageData = stockRepository.findBySDate(DateFormatUtils.format(new Date(), "yyyyMMdd"), new PageRequest(page++, 100,new Sort(Sort.Direction.ASC,"code")));
         if (pageData.getContent().size() == 0) return;
         for (Stock s : pageData.getContent()) {
             getAndSaveHis(s);

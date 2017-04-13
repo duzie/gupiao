@@ -9,8 +9,8 @@
     <script src="js/template.js"></script>
 </head>
 <body>
-<div style="width:500px;margin:20px">
-<table class="uk-table">
+<div style="width:500px;margin:20px;float: left;">
+<table class="uk-table fall">
     <thead>
     <tr>
         <th>代码</th>
@@ -38,8 +38,9 @@
 
     $.get('fall',function(data){
         var html = template('tpl-stocks', data);
-        $('table tbody').html(html);
-    })
+        $('.fall tbody').html(html);
+    });
+
 </script>
 </body>
 </html>

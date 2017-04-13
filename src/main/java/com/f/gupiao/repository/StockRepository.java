@@ -17,7 +17,7 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
 
     Page<Stock> findAllByOrderByCodeAsc(Pageable pageable);
 
-    Page<Stock> findBySDateOrderByFallDescCodeAsc(String sDate, Pageable pageable);
+    Page<Stock> findBySDate(String sDate, Pageable pageable);
 
     Page<Stock> findByCodeOrderBySDateDesc(String code, Pageable pageable);
 
@@ -36,5 +36,11 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
     @Modifying
     @Query(value = "delete from Stock where rowid not in (select max(rowid) from Stock where code=:code group by code,s_date) and code=:code",nativeQuery = true)
     void deleteRepeat(@Param("code") String code, @Param("code") String code1);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from from Stock where sysdate>create_date+40",nativeQuery = true)
+    public int deleteOld();
+
 
 }
