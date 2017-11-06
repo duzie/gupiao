@@ -33,7 +33,7 @@ public class Jqka {
     @Autowired
     StockRepository stockRepository;
 
-    @Scheduled(cron = "0 25 9,14,15 ? * 1-5")
+    @Scheduled(cron = "0 25,45 9,14,15 ? * 1-5")
     synchronized void sync() {
         int i = 1;
         while (true) {

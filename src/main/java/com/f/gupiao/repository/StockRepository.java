@@ -39,7 +39,7 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "delete from from Stock where sysdate>create_date+40",nativeQuery = true)
+    @Query(value = "delete from Stock where sysdate-40>PARSEDATETIME(s_date,'yyyyMMdd')",nativeQuery = true)
     public int deleteOld();
 
 
