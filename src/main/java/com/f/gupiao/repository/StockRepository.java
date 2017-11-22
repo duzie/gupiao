@@ -34,12 +34,12 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "delete from Stock where rowid not in (select max(rowid) from Stock where code=:code group by code,s_date) and code=:code",nativeQuery = true)
+    @Query(value = "delete from Stock where rowid not in (select max(rowid) from Stock where code=:code group by code,s_date) and code=:code", nativeQuery = true)
     void deleteRepeat(@Param("code") String code, @Param("code") String code1);
 
     @Transactional
     @Modifying
-    @Query(value = "delete from Stock where sysdate-40>PARSEDATETIME(s_date,'yyyyMMdd')",nativeQuery = true)
+    @Query(value = "delete from Stock where sysdate - 40 > PARSEDATETIME(s_date,'yyyyMMdd')", nativeQuery = true)
     public int deleteOld();
 
 
