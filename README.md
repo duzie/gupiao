@@ -1,2 +1,2 @@
 # gupiao
- <http://wx-wzb.yhd123.com:9000/>
+ <http://2os.win:9001/>
